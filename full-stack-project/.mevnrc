@@ -1,0 +1,8 @@
+{
+  "name": "full-stack-project",
+  "template": "Default",
+  "isConfigured": {
+    "client": false,
+    "server": true
+  }
+}

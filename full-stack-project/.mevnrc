@@ -2,7 +2,7 @@
   "name": "full-stack-project",
   "template": "Default",
   "isConfigured": {
-    "client": false,
+    "client": true,
     "server": true
   }
 }

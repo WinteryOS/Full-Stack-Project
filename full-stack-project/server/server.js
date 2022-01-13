@@ -1,6 +1,7 @@
 // Importing required modules
 const cors = require("cors");
 const express = require("express");
+const jsonwebtoken = require("jsonwebtoken");
 
 // parse env variables
 require("dotenv").config();

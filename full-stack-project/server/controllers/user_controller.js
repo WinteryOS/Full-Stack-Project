@@ -2,7 +2,7 @@
 
 const User = require("../models/user_schema");
 
-const createData = (req, res) => {
+const createUser = (req, res) => {
   User.create(req.body)
     .then((data) => {
       console.log("New User Created!", data);
@@ -19,7 +19,7 @@ const createData = (req, res) => {
     });
 };
 
-const readData = (req, res) => {
+const getUsers = (req, res) => {
   User.find()
     .then((data) => {
       res.status(200).json(data);
@@ -30,7 +30,11 @@ const readData = (req, res) => {
     });
 };
 
-const updateData = (req, res) => {
+const getUserByID = (req, res) => {
+  User.findById(req.params.id);
+};
+
+const updateUser = (req, res) => {
   User.findByIdAndUpdate(req.params.id, req.body, {
     useFindAndModify: false,
     new: true,
@@ -50,7 +54,7 @@ const updateData = (req, res) => {
     });
 };
 
-const deleteData = (req, res) => {
+const deleteUser = (req, res) => {
   User.findById(req.params.id)
     .then((data) => {
       if (!data) {
@@ -68,9 +72,17 @@ const deleteData = (req, res) => {
     });
 };
 
+// const authenticate = (req, res) => {
+//   User.findOne({username: req.body.username}, (err, user)=>{
+//     if(err) throw err;
+//   })
+// }
+
 module.exports = {
-  createData,
-  readData,
-  updateData,
-  deleteData,
+  createUser,
+  getUsers,
+  getUserByID,
+  updateUser,
+  deleteUser,
+  authenticate,
 };

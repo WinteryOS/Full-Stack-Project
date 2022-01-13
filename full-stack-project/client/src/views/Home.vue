@@ -2,6 +2,8 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/mevn.jpg" width="350" />
     <HelloWorld msg="Default Boilerplate Template" />
+    <a href="/register">Register</a>
+    <a href="/login">Login</a>
   </div>
 </template>
 

@@ -1,18 +1,23 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <h1>Hello {{ user.username }}, Welcome To Main App Page</h1>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  name: "about",
-  // data() {},
+  name: "movieapp",
+  data() {
+    return {
+      //   user: null,
+      //   token: null,
+    };
+  },
   created() {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.token = JSON.parse(localStorage.getItem("token"));
-    //If token - Redirect To Movie Page
+    //If not token - Redirect Page
   },
 };
 </script>

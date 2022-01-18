@@ -16,5 +16,10 @@ export default {
   components: {
     HelloWorld,
   },
+  created() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.token = JSON.parse(localStorage.getItem("token"));
+    //If token - Redirect To Movie Page
+  },
 };
 </script>

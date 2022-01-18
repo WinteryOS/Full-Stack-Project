@@ -1,9 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import About from "./views/About.vue";
 import Register from "./views/Register.vue";
 import Login from "./views/Login.vue";
 import Search from "./views/Search.vue";
+import MovieApp from "./views/MovieApp.vue";
 
 Vue.use(Router);
 
@@ -19,7 +21,7 @@ export default new Router({
     {
       path: "/about",
       name: "about",
-      component: () => import("./views/About.vue"),
+      component: About,
     },
     {
       path: "/register",
@@ -35,6 +37,11 @@ export default new Router({
       path: "/search",
       name: "search",
       component: Search,
+    },
+    {
+      path: "/movieapp",
+      name: "movieapp",
+      component: MovieApp,
     },
   ],
 });

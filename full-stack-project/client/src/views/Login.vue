@@ -19,7 +19,7 @@
       />
       <hr />
 
-      <button type="submit" class="registerbtn">Register</button>
+      <button type="submit" class="loginbtn">Login</button>
     </div>
   </form>
 </template>
@@ -28,6 +28,7 @@
 import axios from "axios";
 
 export default {
+  name: "login",
   data() {
     return {
       form: {
@@ -41,13 +42,13 @@ export default {
       axios
         .post("http://localhost:9000/api/authenticate", this.form)
         .then((res) => {
-          //Store Token To Local Storage
-          //Route User to App Page
-          console.log(res.data.token);
-          console.log(res.data.user);
+          localStorage.setItem("token", JSON.stringify(res.data.token));
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          this.$router.replace({
+            name: "movieapp",
+          });
         })
         .catch((err) => {
-          //Display Error On Page
           console.log(err);
         });
     },

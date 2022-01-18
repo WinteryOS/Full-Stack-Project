@@ -1,19 +1,59 @@
 <template>
-  <div class="loginArea">
-  <hr>
-    <label><b>Email</b></label>
-    <input type="text" placeholder="Enter Email">
+  <form v-on:submit.prevent="submitForm">
+    <div class="registerArea">
+      <hr />
+      <label><b>Username</b></label>
+      <input
+        type="text"
+        id="username"
+        placeholder="Enter Username"
+        v-model="form.username"
+      />
 
-    <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password">
-    <hr>
+      <label><b>Password</b></label>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter Password"
+        v-model="form.password"
+      />
+      <hr />
 
-
-    <button type="submit" class="loginbtn">Log in!</button>
-  </div>
-
+      <button type="submit" class="registerbtn">Register</button>
+    </div>
+  </form>
 </template>
 
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      form: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    submitForm() {
+      axios
+        .post("http://localhost:9000/api/authenticate", this.form)
+        .then((res) => {
+          //Store Token To Local Storage
+          //Route User to App Page
+          console.log(res.data.token);
+          console.log(res.data.user);
+        })
+        .catch((err) => {
+          //Display Error On Page
+          console.log(err);
+        });
+    },
+  },
+};
+</script>
 
 <style scoped>
 .loginArea {
@@ -21,7 +61,8 @@
 }
 
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -30,7 +71,8 @@ input[type=text], input[type=password] {
   background: #f1f1f1;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
   background-color: #ddd;
   outline: none;
 }
@@ -43,7 +85,7 @@ hr {
 
 /* Set a style for the submit/login button */
 .loginbtn {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
   padding: 16px 20px;
   margin: 8px 0;
@@ -54,7 +96,7 @@ hr {
 }
 
 .loginbtn:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 /* Add a blue text color to links */

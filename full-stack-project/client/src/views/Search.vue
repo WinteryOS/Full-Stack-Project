@@ -1,3 +1,5 @@
+
+
 <template>
   <div>
       <div class="custom-select" style="width:200px;">
@@ -10,7 +12,7 @@
 </div>
     <ul v-if="posts && posts.length">
       <li v-for="post of posts">
-        <p><strong>{{post.}}</strong></p>
+        <p><strong>{{post.title}}</strong></p>
         <p>{{post.body}}</p>
       </li>
     </ul>

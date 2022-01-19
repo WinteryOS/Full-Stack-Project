@@ -1,8 +1,8 @@
 <template>
   <div class="registerArea">
   <hr>
-    <label><b>Email</b></label>
-    <input type="text" placeholder="Enter Email">
+    <label><b>Username</b></label>
+    <input type="text" placeholder="Enter Username">
 
     <label><b>Password</b></label>
     <input type="password" placeholder="Enter Password">

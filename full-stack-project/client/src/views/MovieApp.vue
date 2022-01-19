@@ -18,6 +18,9 @@ export default {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.token = JSON.parse(localStorage.getItem("token"));
     //If not token - Redirect Page
+    if (!this.token) {
+      this.$router.push("/");
+    }
   },
 };
 </script>

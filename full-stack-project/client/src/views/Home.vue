@@ -20,6 +20,9 @@ export default {
     this.user = JSON.parse(localStorage.getItem("user"));
     this.token = JSON.parse(localStorage.getItem("token"));
     //If token - Redirect To Movie Page
+    if (this.token) {
+      this.$router.push("/movieapp");
+    }
   },
 };
 </script>

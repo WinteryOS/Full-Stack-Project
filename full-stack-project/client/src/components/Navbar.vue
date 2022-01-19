@@ -1,11 +1,12 @@
 <template>
   <div>
     <div id="nav" v-if="name === 'movieapp'">
-      <router-link to="/">Home</router-link>
+      <router-link to="/">Account</router-link>
+      <div v-on:click="signOut">Sign Out</div>
     </div>
     <div id="nav" v-else>
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">Test</router-link>
+      <router-link to="/about">About</router-link>
     </div>
     <router-view />
   </div>
@@ -13,15 +14,13 @@
 <script>
 export default {
   props: ["name"],
-  data() {
-    return {
-      loggedIn: false,
-    };
+  methods: {
+    signOut: () => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      window.location.reload();
+    },
   },
-  created() {
-    console.log("create");
-  },
-  watch: {},
 };
 </script>
 

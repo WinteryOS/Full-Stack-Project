@@ -1,16 +1,24 @@
 <template>
-  <div>
-    <div id="nav" v-if="name === 'movieapp'">
-      <router-link to="/">Account</router-link>
-      <div v-on:click="signOut">Sign Out</div>
+  <div class="navbar">
+    <div class="nav-content">
+      <router-link class="nav-link row" to="/"
+        ><img class="sm-icon" alt="Movie Icon" src="../assets/movie-icon.png" />
+        <div class="title">Movie Review</div></router-link
+      >
+      <div>
+        <div id="nav" class="row" v-if="name === 'movieapp'">
+          <router-link class="nav-link" to="/">Account</router-link>
+          <div class="nav-link" v-on:click="signOut">Sign Out</div>
+        </div>
+        <div id="nav" v-else>
+          <router-link class="nav-link" to="/register">Sign Up</router-link>
+          <router-link class="nav-link" to="/login">Login</router-link>
+        </div>
+      </div>
     </div>
-    <div id="nav" v-else>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
   </div>
 </template>
+
 <script>
 export default {
   props: ["name"],
@@ -25,16 +33,37 @@ export default {
 </script>
 
 <style>
-#nav {
-  padding: 30px;
-}
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.navbar {
+  background-color: #f3f3f3;
+  height: 80px;
+}
+.nav-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.nav-link {
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+.title {
+  font-size: 28px;
+  padding: 0px 15px;
+  margin-top: 5px;
+  color: black;
 }
 </style>

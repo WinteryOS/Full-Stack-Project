@@ -70,7 +70,16 @@ body {
   color: #ffffff;
 }
 form {
+}
+.account-form {
   max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+.search-form {
+  max-width: 800px;
   margin: 50px auto;
   padding: 30px;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
@@ -92,7 +101,7 @@ input[type="password"]:focus {
   background-color: #eee;
   outline: none;
 }
-.formArea {
+.form-area {
   padding: 16px;
 }
 .grey-bg {

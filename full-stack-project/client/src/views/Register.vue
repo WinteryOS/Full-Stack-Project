@@ -1,6 +1,6 @@
 <template>
-  <form v-on:submit.prevent="submitForm">
-    <div class="formArea">
+  <form class="account-form" v-on:submit.prevent="submitForm">
+    <div class="form-area">
       <label><b>Username</b></label>
       <input
         type="text"

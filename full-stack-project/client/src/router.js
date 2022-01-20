@@ -6,6 +6,7 @@ import Register from "./views/Register.vue";
 import Login from "./views/Login.vue";
 import Search from "./views/Search.vue";
 import MovieApp from "./views/MovieApp.vue";
+import Account from "./views/Account.vue";
 
 Vue.use(Router);
 
@@ -37,6 +38,11 @@ export default new Router({
       path: "/search",
       name: "search",
       component: Search,
+    },
+    {
+      path: "/account",
+      name: "account",
+      component: Account,
     },
     {
       path: "/movieapp",

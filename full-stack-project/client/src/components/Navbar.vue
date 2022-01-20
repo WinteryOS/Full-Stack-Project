@@ -6,8 +6,12 @@
         <div class="title">Movie Review</div></router-link
       >
       <div>
-        <div id="nav" class="row" v-if="name === 'movieapp'">
-          <router-link class="nav-link" to="/">Account</router-link>
+        <div
+          id="nav"
+          class="row"
+          v-if="name === 'movieapp' || name === 'account'"
+        >
+          <router-link class="nav-link" to="/account">Account</router-link>
           <div class="nav-link" v-on:click="signOut">Sign Out</div>
         </div>
         <div id="nav" v-else>

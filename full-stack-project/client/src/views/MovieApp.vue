@@ -1,11 +1,5 @@
 <template>
   <div class="page-space content">
-    <h1>Hello {{ user.username }}, Welcome To Main App Page</h1>
-    <div class="app-subtitle">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non leo
-      in leo interdum consequat quis sit amet diam. Donec a aliquet ante.
-      Vestibulum ac dapibus ex, ut pellentesque odio. Ut at consectetur nulla.
-    </div>
     <SearchForm />
   </div>
 </template>

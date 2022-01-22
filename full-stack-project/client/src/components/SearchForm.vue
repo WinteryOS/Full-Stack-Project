@@ -1,32 +1,44 @@
 <template>
-  <form class="search-form" v-on:submit.prevent="submitForm">
-    <div class="form-area">
-    <div class="search-inputs">
-    <div class="">
-      <label><b>Username</b></label>
-      <input
-        type="text"
-        id="username"
-        placeholder="Enter Username"
-        v-model="form.username"
-      />
+  <div>
+    <form class="search-form" v-on:submit.prevent="submitForm">
+      <div class="form-area">
+        <div>
+          <div>
+            <label><b>Title</b></label>
+            <input
+              type="text"
+              id="input"
+              placeholder="Enter Movie Title or Actor"
+              v-model="form.input"
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn confirm-btn">SEARCH</button>
+      </div>
+    </form>
+    <div class="movie-section" v-if="popular.length">
+      <div class="" v-for="movie in popular">
+        <div v-on:click="movieSelected(movie.id)">
+          <img
+            class="movie-img"
+            v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
+          />
+        </div>
+      </div>
     </div>
-    <div class="">
-      <label><b>Password</b></label>
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter Password"
-        v-model="form.password"
-      />
-    </div>
-    </div>
-      <button type="submit" class="btn confirm-btn">EDIT</button>
-    </div>
-  </form>
+  </div>
 </template>
 
 <script>
+//Genre Using JSON File
+
+//Display Image
+//https://image.tmdb.org/t/p/original/b6qUu00iIIkXX13szFy7d0CyNcg.jpg
+
+//https://api.themoviedb.org/3/search/multi?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=toby&page=1&include_adult=false
+
+//Popular
+//https://api.themoviedb.org/3/movie/popular?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&page=1
 import axios from "axios";
 
 export default {
@@ -34,13 +46,14 @@ export default {
   data() {
     return {
       form: {
-        username: "",
-        password: "",
+        input: "",
       },
+      popular: [],
     };
   },
   methods: {
     submitForm() {
+      console.log(this.form.input);
       //ADJUST POST TO PUT
       // axios
       //   .post("http://localhost:9000/api/authenticate", this.form)
@@ -55,10 +68,25 @@ export default {
       //     console.log(err);
       //   });
     },
+    movieSelected(id) {
+      this.$router.push(`/movie/${id}`);
+    },
+  },
+  created() {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/movie/popular?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&page=1"
+      )
+      .then((res) => {
+        this.popular = res.data.results;
+        console.log(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 
-// <script>
 // import axios from 'axios';
 
 // export default {
@@ -81,27 +109,24 @@ export default {
 //     })
 //   }
 // }
-
-// // Movie Title Search
-// // https://api.themoviedb.org/3/search/movie?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=<<INPUT>>&page=1&include_adult=false
-
-// // Actor Search
-// // https://api.themoviedb.org/3/search/person?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=<<INPUT>>&page=1&include_adult=false
-
-// // Genre Search
-// // https://api.themoviedb.org/3/genre/movie/list?api_key=21942037df64bd391a7cff90bc6755db&language=en-US
-//         // Only brings up genre list, doesn't let you select certian ones.
-
-// </script>
 </script>
 
 <style>
-.search-inputs{
-    display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.movie-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
   grid-gap: 1rem;
   justify-items: center;
   align-items: center;
 }
-
+.movie-img {
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.4);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.movie-img:hover {
+  width: 205px;
+}
 </style>

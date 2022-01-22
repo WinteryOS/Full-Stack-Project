@@ -7,6 +7,7 @@ import Login from "./views/Login.vue";
 import Search from "./views/Search.vue";
 import MovieApp from "./views/MovieApp.vue";
 import Account from "./views/Account.vue";
+import Movie from "./views/Movie.vue";
 
 Vue.use(Router);
 
@@ -48,6 +49,12 @@ export default new Router({
       path: "/movieapp",
       name: "movieapp",
       component: MovieApp,
+    },
+    {
+      path: "/movie/:id",
+      name: "movie",
+      component: Movie,
+      props: true,
     },
   ],
 });

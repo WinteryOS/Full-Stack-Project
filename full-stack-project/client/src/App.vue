@@ -79,10 +79,14 @@ form {
   border-radius: 5px;
 }
 .search-form {
-  max-width: 800px;
-  margin: 50px auto;
+  position: fixed;
+  z-index: 10;
+  bottom: 50px;
+  right: 50px;
+  width: 350px;
   padding: 30px;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.4);
   border-radius: 5px;
 }
 input[type="text"],

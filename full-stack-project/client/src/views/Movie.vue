@@ -1,23 +1,66 @@
 <template>
-  <div v-if="movie">
-    <div>{{ movie.title }}</div>
-    <img
-      class="movie-img"
-      v-bind:src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`"
-    />
+  <div>
+    <div class="content movie-content border-test" v-if="movie">
+      <img
+        class="backdrop-img border-test"
+        v-bind:src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`"
+      />
+      <div class="border-test">
+        <div class="row-space-between">
+          <div>{{ movie.title }}</div>
+          <div class="btn default-btn" v-on:click="showModal">
+            LEAVE A REVIEW
+          </div>
+        </div>
+        <div>{{ movie.overview }}</div>
+        <div>--More info about show--</div>
+      </div>
+      <div></div>
+      <Modal v-show="isModalVisable" @close="closeModal" />
+    </div>
+    <div class="review-content row-center border-test">
+      <div class="review-card">
+        <div>John Doe</div>
+        <div>This movei was great!</div>
+        <div>Star amount</div>
+      </div>
+      <div class="review-card">
+        <div>John Doe</div>
+        <div>This movei was great!</div>
+        <div>Star amount</div>
+      </div>
+      <div class="review-card">
+        <div>John Doe</div>
+        <div>This movei was great!</div>
+        <div>Star amount</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import Modal from "@/components/ReviewModal.vue";
 export default {
   name: "movie",
+  components: {
+    Modal,
+  },
   data() {
     return {
       movie: null,
+      isModalVisable: false,
       //   token: null,
     };
+  },
+  methods: {
+    showModal() {
+      console.log("test");
+      this.isModalVisable = true;
+    },
+    closeModal() {
+      this.isModalVisable = false;
+    },
   },
   created() {
     axios
@@ -33,4 +76,31 @@ export default {
       });
   },
 };
+
+// grid-row: auto / span 2;
 </script>
+
+<style>
+.movie-content {
+  display: grid;
+  max-width: 900px;
+  justify-items: center;
+  align-items: center;
+  text-align: left;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  border: 1px solid black;
+}
+.review-content {
+  margin: 0 auto;
+  max-width: 900px;
+}
+.review-card {
+  padding: 20px;
+  margin: 20px 10px;
+  width: 225px;
+  border: 1px solid red;
+}
+.backdrop-img {
+  max-width: 400px;
+}
+</style>

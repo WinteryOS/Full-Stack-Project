@@ -13,12 +13,25 @@
             />
           </div>
         </div>
-        <button type="submit" class="btn confirm-btn">SEARCH</button>
+        <div class="row-space-around">
+          <div class="btn default-btn" v-on:click="reset">Reset</div>
+          <button type="submit" class="btn confirm-btn">SEARCH</button>
+        </div>
       </div>
     </form>
-    <div class="movie-section" v-if="popular.length">
-      <div class="" v-for="movie in popular">
-        <div v-on:click="movieSelected(movie.id)">
+    <div class="movie-section" v-if="searched.length">
+      <div v-for="movie in searched">
+        <div class="movie-container" v-on:click="movieSelected(movie.id)">
+          <img
+            class="movie-img"
+            v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="movie-section" v-else-if="popular.length">
+      <div v-for="movie in popular">
+        <div class="movie-container" v-on:click="movieSelected(movie.id)">
           <img
             class="movie-img"
             v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
@@ -49,27 +62,43 @@ export default {
         input: "",
       },
       popular: [],
+      searched: [],
     };
   },
   methods: {
     submitForm() {
-      console.log(this.form.input);
-      //ADJUST POST TO PUT
-      // axios
-      //   .post("http://localhost:9000/api/authenticate", this.form)
-      //   .then((res) => {
-      //     //Local Storage Remove
-      //     localStorage.setItem("token", JSON.stringify(res.data.token));
-      //     localStorage.setItem("user", JSON.stringify(res.data.user));
-      //     //Popup Showing Success
-      //   })
-      //   .catch((err) => {
-      //     //Error Display on Form
-      //     console.log(err);
-      //   });
+      // console.log(this.form.input);
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/multi?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=${this.form.input}&page=1`
+        )
+        .then((res) => {
+          this.searched = res.data.results;
+          this.popular = [];
+          console.log(res.data.results);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     movieSelected(id) {
       this.$router.push(`/movie/${id}`);
+    },
+    reset() {
+      if (!this.popular.length) {
+        axios
+          .get(
+            "https://api.themoviedb.org/3/movie/popular?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&page=1"
+          )
+          .then((res) => {
+            this.popular = res.data.results;
+            this.searched = [];
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      this.form.input = "";
     },
   },
   created() {
@@ -128,5 +157,8 @@ export default {
 }
 .movie-img:hover {
   width: 205px;
+}
+.movie-container {
+  height: 310px;
 }
 </style>

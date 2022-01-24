@@ -76,8 +76,6 @@ export default {
       });
   },
 };
-
-// grid-row: auto / span 2;
 </script>
 
 <style>

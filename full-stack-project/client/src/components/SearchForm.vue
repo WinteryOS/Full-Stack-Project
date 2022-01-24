@@ -43,15 +43,6 @@
 </template>
 
 <script>
-//Genre Using JSON File
-
-//Display Image
-//https://image.tmdb.org/t/p/original/b6qUu00iIIkXX13szFy7d0CyNcg.jpg
-
-//https://api.themoviedb.org/3/search/multi?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=toby&page=1&include_adult=false
-
-//Popular
-//https://api.themoviedb.org/3/movie/popular?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&page=1
 import axios from "axios";
 
 export default {
@@ -67,7 +58,6 @@ export default {
   },
   methods: {
     submitForm() {
-      // console.log(this.form.input);
       axios
         .get(
           `https://api.themoviedb.org/3/search/multi?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=${this.form.input}&page=1`
@@ -115,29 +105,6 @@ export default {
       });
   },
 };
-
-// import axios from 'axios';
-
-// export default {
-//   data() {
-//     return {
-//       posts: [],
-//       errors: []
-//     }
-//   },
-
-//   // Fetches posts when the component is created.
-//   created() {
-//     axios.get(`https://api.themoviedb.org/3/search/person?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=Nicholas%20Cage&page=1&include_adult=false`)
-//     .then(response => {
-//       // JSON responses are automatically parsed.
-//       this.posts = response.data
-//     })
-//     .catch(e => {
-//       this.errors.push(e)
-//     })
-//   }
-// }
 </script>
 
 <style>

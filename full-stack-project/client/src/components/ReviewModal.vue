@@ -1,28 +1,56 @@
 <template>
-  <div class="modal-backdrop">
-    <div class="modal">
-      <header class="modal-header">
-        <slot name="header"> Leave A Review </slot>
-        <button type="button" class="btn-close" @click="close">x</button>
-      </header>
-      <section class="modal-body">
-        <slot name="body"> Comment Section</slot>
-      </section>
-      <footer class="modal-footer">
-        <slot name="footer"> 5 Star Section</slot>
-        <button type="button" class="btn-green" @click="close">
-          Submit/Close
-        </button>
-      </footer>
+  <form>
+    <div class="modal-backdrop">
+      <div class="modal">
+        <header class="modal-header">
+          <slot name="header"> Leave A Review </slot>
+          <button type="button" class="btn-close" @click="close">x</button>
+        </header>
+        <section class="modal-body">
+          <slot name="body">
+            <textarea
+              v-model="form.review"
+              placeholder="add multiple lines"
+            ></textarea>
+          </slot>
+        </section>
+        <footer class="modal-footer">
+          <slot name="footer">
+            <star-rating v-model="form.rating"></star-rating>
+          </slot>
+          <button type="button" class="btn-green" @click="close">
+            Submit/Close
+          </button>
+        </footer>
+      </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
+import StarRating from "vue-star-rating";
 export default {
   name: "Modal",
+  data() {
+    return {
+      form: {
+        rating: 0,
+        review: "",
+        movieId: "",
+        username: "",
+      },
+    };
+  },
+  components: {
+    StarRating,
+  },
   methods: {
     close() {
+      const user = JSON.parse(localStorage.getItem("user"));
+      this.form.username = user.username;
+      this.form.movieId = this.$route.params.id;
+      console.log(this.form);
+      //axios - add review
       this.$emit("close");
     },
   },

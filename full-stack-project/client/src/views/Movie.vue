@@ -1,22 +1,31 @@
 <template>
   <div>
-    <div class="content movie-content border-test" v-if="movie">
-      <img
+    <div class="backdrop-holder">
+           <div class="content backdrop-content border-test" v-if="movie">
+        <img
         class="backdrop-img border-test"
         v-bind:src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`"
       />
+     </div>
+      </div>
+
+    <div class="content movie-content border-test" v-if="movie">
+      <img
+        class="poster-img border-test"
+        v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
+      />
+        <h1>{{ movie.title }}</h1>
+      <br>
       <div class="border-test">
         <div class="row-space-between">
-          <div>{{ movie.title }}</div>
-          <div class="btn default-btn" v-on:click="showModal">
-            LEAVE A REVIEW
-          </div>
         </div>
         <div>{{ movie.overview }}</div>
         <div>-----More info about movie-------</div>
         <div>GENRES</div>
         <div v-for="genre in movie.genres">{{ genre.name }}</div>
+        <div class="btn default-btn" v-on:click="showModal">LEAVE A REVIEW</div>
       </div>
+
       <div></div>
     </div>
     <div v-if="reviews" class="review-content row-center border-test">
@@ -85,9 +94,31 @@ export default {
 </script>
 
 <style>
+
+.backdrop-holder{
+    width:100%;
+    height:400px;
+    overflow:hidden;
+}
+
+.backdrop-img{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
 .movie-content {
   display: grid;
   max-width: 900px;
+  justify-items: center;
+  align-items: center;
+  text-align: left;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  border: 1px solid black;
+}
+.backdrop-content {
+  display: grid;
+  max-width: 1900px;
   justify-items: center;
   align-items: center;
   text-align: left;
@@ -104,7 +135,8 @@ export default {
   width: 225px;
   border: 1px solid red;
 }
-.backdrop-img {
+.poster-img {
+  max-height: 300px;
   max-width: 400px;
 }
 </style>

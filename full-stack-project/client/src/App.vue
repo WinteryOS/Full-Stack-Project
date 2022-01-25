@@ -74,6 +74,7 @@ body {
 .default-btn {
   background-color: #02198b;
   color: #ffffff;
+  max-width: 150px;
 }
 .confirm-btn {
   background-color: #04aa6d;

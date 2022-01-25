@@ -1,30 +1,45 @@
-// Importing required modules
 const cors = require("cors");
 const express = require("express");
+const jsonwebtoken = require("jsonwebtoken");
 
-// parse env variables
 require("dotenv").config();
 
 require("./helpers/db/mongodb.js")();
 
-// Configuring port
 const port = process.env.PORT || 9000;
 
 const app = express();
 
-// Configure middlewares
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use((req, res, next) => {
+  if (
+    req.headers &&
+    req.headers.authorization &&
+    req.headers.authorization.split(" ")[0] === "JWT"
+  ) {
+    jsonwebtoken.verify(
+      req.headers.authorization.split(" ")[1],
+      "MovieReviews",
+      (err, decode) => {
+        if (err) req.user = undefined;
+        req.user = decode;
+        next();
+      }
+    );
+  } else {
+    req.user = undefined;
+    next();
+  }
+});
 
 app.set("view engine", "html");
 
-// Static folder
 app.use(express.static(__dirname + "/views/"));
 
-// Defining route middleware
 app.use("/api", require("./routes/api"));
 
-// Listening to port
 app.listen(port);
 console.log(`Listening On http://localhost:${port}/api`);
 

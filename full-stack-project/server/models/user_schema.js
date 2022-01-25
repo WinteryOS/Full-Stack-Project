@@ -5,8 +5,11 @@ const userSchema = new Schema(
     username: {
       type: String,
     },
-    password: {
+    hash_password: {
       type: String,
+    },
+    admin: {
+      type: Boolean,
     },
   },
   { timestamps: true }

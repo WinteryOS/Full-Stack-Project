@@ -17,7 +17,7 @@
         v-model="form.password"
       />
 
-      <button type="submit" class="btn confirm-btn">LOGIN</button>
+      <button type="submit" class="btn confirm-btn">EDIT</button>
     </div>
   </form>
 </template>
@@ -26,7 +26,7 @@
 import axios from "axios";
 
 export default {
-  name: "login",
+  name: "account",
   data() {
     return {
       form: {
@@ -37,18 +37,19 @@ export default {
   },
   methods: {
     submitForm() {
-      axios
-        .post("http://localhost:9000/api/authenticate", this.form)
-        .then((res) => {
-          localStorage.setItem("token", JSON.stringify(res.data.token));
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-          this.$router.replace({
-            name: "movieapp",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      //ADJUST POST TO PUT
+      // axios
+      //   .post("http://localhost:9000/api/authenticate", this.form)
+      //   .then((res) => {
+      //     //Local Storage Remove
+      //     localStorage.setItem("token", JSON.stringify(res.data.token));
+      //     localStorage.setItem("user", JSON.stringify(res.data.user));
+      //     //Popup Showing Success
+      //   })
+      //   .catch((err) => {
+      //     //Error Display on Form
+      //     console.log(err);
+      //   });
     },
   },
 };

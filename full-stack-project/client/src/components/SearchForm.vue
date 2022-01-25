@@ -54,6 +54,7 @@ export default {
       },
       popular: [],
       searched: [],
+      genres: [],
     };
   },
   methods: {
@@ -63,6 +64,7 @@ export default {
           `https://api.themoviedb.org/3/search/multi?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=${this.form.input}&page=1`
         )
         .then((res) => {
+          //Get genres and filter with
           this.searched = res.data.results;
           this.popular = [];
           console.log(res.data.results);

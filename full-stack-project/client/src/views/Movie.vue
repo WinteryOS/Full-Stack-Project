@@ -13,28 +13,19 @@
           </div>
         </div>
         <div>{{ movie.overview }}</div>
-        <div>--More info about show--</div>
+        <div>-----More info about movie-------</div>
+        <div>GENRES</div>
+        <div v-for="genre in movie.genres">{{ genre.name }}</div>
       </div>
       <div></div>
-      <Modal v-show="isModalVisable" @close="closeModal" />
     </div>
-    <div class="review-content row-center border-test">
-      <div class="review-card">
-        <div>John Doe</div>
-        <div>This movei was great!</div>
-        <div>Star amount</div>
-      </div>
-      <div class="review-card">
-        <div>John Doe</div>
-        <div>This movei was great!</div>
-        <div>Star amount</div>
-      </div>
-      <div class="review-card">
-        <div>John Doe</div>
-        <div>This movei was great!</div>
-        <div>Star amount</div>
+    <div v-if="reviews" class="review-content row-center border-test">
+      <div v-for="review in reviews" class="review-card">
+        <div>{{ review.username }}</div>
+        <div>{{ review.review }}</div>
       </div>
     </div>
+    <Modal v-show="isModalVisable" @close="closeModal" />
   </div>
 </template>
 
@@ -50,12 +41,11 @@ export default {
     return {
       movie: null,
       isModalVisable: false,
-      //   token: null,
+      reviews: [],
     };
   },
   methods: {
     showModal() {
-      console.log("test");
       this.isModalVisable = true;
     },
     closeModal() {
@@ -63,6 +53,19 @@ export default {
     },
   },
   created() {
+    //GETS REVIEWS
+    axios
+      .get(`http://localhost:9000/api/review`)
+      .then((res) => {
+        this.reviews = res.data.filter(
+          (review) => review.movieId === this.$route.params.id.toString()
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //GETS MOVIE INFORMATION
     axios
       .get(
         `https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=21942037df64bd391a7cff90bc6755db&language=en-US`
@@ -74,6 +77,9 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+
+    //Getting Cast Members
+    //http://api.themoviedb.org/3/movie/{id}/casts?api_key={api_key}
   },
 };
 </script>

@@ -11,6 +11,19 @@
               placeholder="Enter Movie Title or Actor"
               v-model="form.input"
             />
+            <div class="genre-section">
+              <div v-for="genre in allGenres">
+                <div class="row">
+                  <input
+                    type="checkbox"
+                    v-bind:value="genre.id"
+                    v-bind:id="genre.id"
+                    v-model="form.genre"
+                  />
+                  <div>{{ genre.name }}</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row-space-around">
@@ -39,6 +52,7 @@
         </div>
       </div>
     </div>
+    <div v-else>Sorry we couldn't find the movie you were looking for</div>
   </div>
 </template>
 
@@ -51,27 +65,46 @@ export default {
     return {
       form: {
         input: "",
+        genre: [],
       },
       popular: [],
       searched: [],
-      genres: [],
+      allGenres: [],
     };
   },
   methods: {
     submitForm() {
+      this.searched = [];
       axios
         .get(
           `https://api.themoviedb.org/3/search/multi?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=${this.form.input}&page=1`
         )
         .then((res) => {
-          //Get genres and filter with
-          this.searched = res.data.results;
+          res.data.results.forEach((movie) => {
+            if (
+              movie.media_type === "movie" &&
+              this.compareGenres(this.form.genre, movie.genre_ids)
+            ) {
+              this.searched.push(movie);
+            } else if (movie.media_type === "person") {
+              movie.known_for.forEach((m) => {
+                if (this.compareGenres(this.form.genre, m.genre_ids)) {
+                  this.searched.push(m);
+                }
+              });
+            }
+          });
           this.popular = [];
-          console.log(res.data.results);
         })
         .catch((err) => {
           console.log(err);
         });
+      console.log(this.form.genre);
+    },
+    compareGenres(selectedGenres, movieGenres) {
+      return selectedGenres.every((e) => {
+        return movieGenres.includes(e);
+      });
     },
     movieSelected(id) {
       this.$router.push(`/movie/${id}`);
@@ -91,6 +124,7 @@ export default {
           });
       }
       this.form.input = "";
+      this.form.genre = [];
     },
   },
   created() {
@@ -105,6 +139,9 @@ export default {
       .catch((err) => {
         console.log(err);
       });
+    axios.get("json/genre.json").then((res) => {
+      this.allGenres = res.data;
+    });
   },
 };
 </script>
@@ -129,5 +166,10 @@ export default {
 }
 .movie-container {
   height: 310px;
+}
+.genre-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  border: 1px solid black;
 }
 </style>

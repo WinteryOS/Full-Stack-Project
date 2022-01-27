@@ -1,24 +1,23 @@
 <template>
   <div>
     <div class="backdrop-holder">
-           <div class="content backdrop-content border-test" v-if="movie">
+      <div class="content backdrop-content border-test" v-if="movie">
         <img
-        class="backdrop-img border-test"
-        v-bind:src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`"
-      />
-     </div>
+          class="backdrop-img border-test"
+          v-bind:src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`"
+        />
       </div>
+    </div>
 
     <div class="content movie-content border-test" v-if="movie">
       <img
         class="poster-img border-test"
         v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
       />
-        <h1>{{ movie.title }}</h1>
-      <br>
+      <h1>{{ movie.title }}</h1>
+      <br />
       <div class="border-test">
-        <div class="row-space-between">
-        </div>
+        <div class="row-space-between"></div>
         <div>{{ movie.overview }}</div>
         <div>-----More info about movie-------</div>
         <div>GENRES</div>
@@ -32,6 +31,7 @@
       <div v-for="review in reviews" class="review-card">
         <div>{{ review.username }}</div>
         <div>{{ review.review }}</div>
+        <div>{{ review.rating }}</div>
       </div>
     </div>
     <Modal v-show="isModalVisable" @close="closeModal" />
@@ -94,14 +94,13 @@ export default {
 </script>
 
 <style>
-
-.backdrop-holder{
-    width:100%;
-    height:400px;
-    overflow:hidden;
+.backdrop-holder {
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
 }
 
-.backdrop-img{
+.backdrop-img {
   width: 100%;
   height: auto;
   overflow: hidden;

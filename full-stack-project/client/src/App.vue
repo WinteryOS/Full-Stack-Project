@@ -94,8 +94,8 @@ form {
   z-index: 10;
   bottom: 50px;
   right: 50px;
-  width: 350px;
-  padding: 30px;
+  width: 475px;
+  padding: 20px;
   background-color: #ffffff;
   box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.4);
   border-radius: 5px;

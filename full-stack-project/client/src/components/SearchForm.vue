@@ -1,41 +1,57 @@
 <template>
   <div>
-    <form class="search-form" v-on:submit.prevent="submitForm">
-      <div class="form-area">
-        <div>
+    <Header :movie="popular[0]" :content="true" />
+    <div class="page-space content">
+      <form class="search-form" v-on:submit.prevent="submitForm">
+        <div class="form-area">
           <div>
-            <label><b>Title</b></label>
-            <input
-              type="text"
-              id="input"
-              placeholder="Enter Movie Title or Actor"
-              v-model="form.input"
+            <div>
+              <label><b>Title</b></label>
+              <input
+                type="text"
+                id="input"
+                placeholder="Enter Movie Title or Actor"
+                v-model="form.input"
+              />
+              <div class="genre-section">
+                <div v-for="genre in allGenres">
+                  <div class="row">
+                    <input
+                      type="checkbox"
+                      v-bind:value="genre.id"
+                      v-bind:id="genre.id"
+                      v-model="form.genre"
+                    />
+                    <div>{{ genre.name }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-space-around">
+            <div class="btn default-btn" v-on:click="reset">Reset</div>
+            <button type="submit" class="btn confirm-btn">SEARCH</button>
+          </div>
+        </div>
+      </form>
+      <div class="movie-section" v-if="searched.length">
+        <div v-for="movie in searched">
+          <div class="movie-container" v-on:click="movieSelected(movie.id)">
+            <img
+              class="movie-img"
+              v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
             />
           </div>
         </div>
-        <div class="row-space-around">
-          <div class="btn default-btn" v-on:click="reset">Reset</div>
-          <button type="submit" class="btn confirm-btn">SEARCH</button>
-        </div>
       </div>
-    </form>
-    <div class="movie-section" v-if="searched.length">
-      <div v-for="movie in searched">
-        <div class="movie-container" v-on:click="movieSelected(movie.id)">
-          <img
-            class="movie-img"
-            v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="movie-section" v-else-if="popular.length">
-      <div v-for="movie in popular">
-        <div class="movie-container" v-on:click="movieSelected(movie.id)">
-          <img
-            class="movie-img"
-            v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
-          />
+      <div class="movie-section" v-else-if="popular.length">
+        <div v-for="movie in popular">
+          <div class="movie-container" v-on:click="movieSelected(movie.id)">
+            <img
+              class="movie-img"
+              v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -44,37 +60,58 @@
 
 <script>
 import axios from "axios";
-
+import Header from "@/components/Header.vue";
 export default {
   name: "account",
   data() {
     return {
       form: {
         input: "",
+        genre: [],
       },
       popular: [],
       searched: [],
-      genres: [],
+      allGenres: [],
     };
+  },
+  components: {
+    Header,
   },
   methods: {
     submitForm() {
+      this.searched = [];
       axios
         .get(
           `https://api.themoviedb.org/3/search/multi?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&query=${this.form.input}&page=1`
         )
         .then((res) => {
-          //Get genres and filter with
-          this.searched = res.data.results;
+          res.data.results.forEach((movie) => {
+            if (
+              movie.media_type === "movie" &&
+              this.compareGenres(this.form.genre, movie.genre_ids)
+            ) {
+              this.searched.push(movie);
+            } else if (movie.media_type === "person") {
+              movie.known_for.forEach((m) => {
+                if (this.compareGenres(this.form.genre, m.genre_ids)) {
+                  this.searched.push(m);
+                }
+              });
+            }
+          });
           this.popular = [];
-          console.log(res.data.results);
         })
         .catch((err) => {
           console.log(err);
         });
     },
+    compareGenres(selectedGenres, movieGenres) {
+      return selectedGenres.every((e) => {
+        return movieGenres.includes(e);
+      });
+    },
     movieSelected(id) {
-      this.$router.push(`/movie/${id}`);
+      this.$router.push(`/${id}`);
     },
     reset() {
       if (!this.popular.length) {
@@ -91,6 +128,7 @@ export default {
           });
       }
       this.form.input = "";
+      this.form.genre = [];
     },
   },
   created() {
@@ -100,11 +138,13 @@ export default {
       )
       .then((res) => {
         this.popular = res.data.results;
-        console.log(res.data.results);
       })
       .catch((err) => {
         console.log(err);
       });
+    axios.get("json/genre.json").then((res) => {
+      this.allGenres = res.data;
+    });
   },
 };
 </script>
@@ -129,5 +169,10 @@ export default {
 }
 .movie-container {
   height: 310px;
+}
+.genre-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  margin-bottom: 40px;
 }
 </style>

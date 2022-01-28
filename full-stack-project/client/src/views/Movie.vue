@@ -14,11 +14,8 @@
         class="poster-img border-test"
         v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
       />
-        <h1>{{ movie.title }}</h1>
-      <br>
-      <div class="border-test">
-        <div class="row-space-between">
-        </div>
+              <h1 class="movieTitle">{{ movie.title }}</h1>
+      <div class="border-test movieDescription">
         <div>{{ movie.overview }}</div>
         <div>-----More info about movie-------</div>
         <div>GENRES</div>
@@ -138,5 +135,32 @@ export default {
 .poster-img {
   max-height: 300px;
   max-width: 400px;
+  position: relative;
+  top: -40px;
 }
+.movieTitle{
+  margin-right: 400px;
+  margin-bottom: 225px;
+}
+
+.movieDescription{
+  display: inline-block;
+  margin-left: 200px;
+  margin-right: -200px;
+}
+
+@media only screen and (max-width: 900px) {
+.movieTitle{
+  margin-right: 20px;
+
+}
+
+.movieDescription{
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: -0px;
+}
+
+}
+
 </style>

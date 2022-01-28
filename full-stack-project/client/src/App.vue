@@ -43,6 +43,13 @@ body {
   align-items: center;
   flex-wrap: wrap;
 }
+.page-space {
+  margin: 60px auto;
+}
+.app-subtitle {
+  max-width: 800px;
+  margin: 0 auto;
+}
 .row-space-between {
   display: flex;
   flex-direction: row;
@@ -61,24 +68,25 @@ body {
   width: 58px;
 }
 .btn {
+  display: inline-block;
   padding: 10px 25px;
   font-weight: 700;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 100vh;
   border: none;
+  color: #ffffff;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
   opacity: 0.9;
+  cursor: pointer;
 }
 .btn:hover {
   opacity: 1;
 }
 .default-btn {
   background-color: #02198b;
-  color: #ffffff;
-  max-width: 150px;
 }
 .confirm-btn {
   background-color: #04aa6d;
-  color: #ffffff;
 }
 form {
 }
@@ -92,8 +100,8 @@ form {
 .search-form {
   position: fixed;
   z-index: 10;
-  bottom: 50px;
-  right: 50px;
+  bottom: 30px;
+  right: 30px;
   width: 475px;
   padding: 20px;
   background-color: #ffffff;
@@ -110,7 +118,9 @@ input[type="password"] {
   background: #f6f6f6;
   border-radius: 3px;
 }
-
+.bold {
+  font-weight: 700;
+}
 input[type="text"]:focus,
 input[type="password"]:focus {
   background-color: #eee;
@@ -121,5 +131,9 @@ input[type="password"]:focus {
 }
 .grey-bg {
   background-color: #eeeeee;
+}
+.white-text {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 }
 </style>

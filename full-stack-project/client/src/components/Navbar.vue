@@ -53,8 +53,11 @@ export default {
   color: #42b983;
 }
 .navbar {
+  position: relative;
   background-color: #f3f3f3;
   height: 80px;
+  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.4);
+  z-index: 10;
 }
 .nav-content {
   display: flex;

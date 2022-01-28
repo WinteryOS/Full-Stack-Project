@@ -126,5 +126,6 @@ export default {
 .poster-img {
   width: 250px;
   border-radius: 7px;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.4);
 }
 </style>

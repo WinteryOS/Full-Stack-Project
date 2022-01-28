@@ -50,24 +50,14 @@ export default {
       const user = JSON.parse(localStorage.getItem("user"));
       this.form.username = user.username;
       this.form.movieId = this.$route.params.id;
-      console.log(this.form);
       axios
         .post("http://localhost:9000/api/review", this.form)
         .then((res) => {
-          //Success - Route to Home or Login
-          //Code Below Routes to Home
           window.location.reload();
-          // this.$router.push("/");
-          // console.log(res.data);
         })
         .catch((err) => {
-          //Display Error On Page
           console.log(err);
         });
-      //axios - add review
-
-      //
-      // this.$emit("close");
     },
   },
 };

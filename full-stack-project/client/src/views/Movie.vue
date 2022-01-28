@@ -1,28 +1,40 @@
 <template>
   <div>
-    <div class="content movie-content border-test" v-if="movie">
+    <Header :movie="movie" :content="false" />
+
+    <div class="movie-content" v-if="movie">
       <img
-        class="backdrop-img border-test"
-        v-bind:src="`https://image.tmdb.org/t/p/original${movie.backdrop_path}`"
+        class="poster-img"
+        v-bind:src="`https://image.tmdb.org/t/p/original${movie.poster_path}`"
       />
-      <div class="border-test">
-        <div class="row-space-between">
-          <div>{{ movie.title }}</div>
-          <div class="btn default-btn" v-on:click="showModal">
-            LEAVE A REVIEW
+
+      <div class="movie-descriptions">
+        <h1 class="white-text">{{ movie.title }}</h1>
+        <div class="row bold">
+          <div v-for="genre in movie.genres">
+            <div style="padding: 20px 20px 20px 0px" class="genre-spacing">
+              {{ genre.name }}
+            </div>
           </div>
         </div>
-        <div>{{ movie.overview }}</div>
-        <div>-----More info about movie-------</div>
-        <div>GENRES</div>
-        <div v-for="genre in movie.genres">{{ genre.name }}</div>
+        <div style="line-height: 1.75">{{ movie.overview }}</div>
+        <div
+          style="margin-top: 25px"
+          class="btn default-btn"
+          v-on:click="showModal"
+        >
+          LEAVE A REVIEW
+        </div>
       </div>
-      <div></div>
     </div>
-    <div v-if="reviews" class="review-content row-center border-test">
-      <div v-for="review in reviews" class="review-card">
-        <div>{{ review.username }}</div>
-        <div>{{ review.review }}</div>
+    <div v-if="reviews.length" class="review-content border-test">
+      <h2 style="padding: 0px 35spx">Reviews:</h2>
+      <div class="row-center">
+        <div v-for="review in reviews" class="review-card">
+          <div>{{ review.username }}</div>
+          <div>{{ review.review }}</div>
+          <div>{{ review.rating }}</div>
+        </div>
       </div>
     </div>
     <Modal v-show="isModalVisable" @close="closeModal" />
@@ -32,10 +44,12 @@
 <script>
 import axios from "axios";
 import Modal from "@/components/ReviewModal.vue";
+import Header from "@/components/Header.vue";
 export default {
   name: "movie",
   components: {
     Modal,
+    Header,
   },
   data() {
     return {
@@ -86,17 +100,22 @@ export default {
 
 <style>
 .movie-content {
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
   max-width: 900px;
-  justify-items: center;
-  align-items: center;
+  margin: -75px auto 0px auto;
   text-align: left;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  border: 1px solid black;
+}
+.movie-descriptions {
+  max-width: 550px;
+  padding: 0px 20px;
 }
 .review-content {
-  margin: 0 auto;
+  margin: 25px auto 25px auto;
   max-width: 900px;
+  text-align: left;
 }
 .review-card {
   padding: 20px;
@@ -104,7 +123,9 @@ export default {
   width: 225px;
   border: 1px solid red;
 }
-.backdrop-img {
-  max-width: 400px;
+.poster-img {
+  width: 250px;
+  border-radius: 7px;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.4);
 }
 </style>

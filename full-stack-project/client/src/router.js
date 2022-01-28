@@ -1,11 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import About from "./views/About.vue";
 import Register from "./views/Register.vue";
 import Login from "./views/Login.vue";
-import Search from "./views/Search.vue";
-import MovieApp from "./views/MovieApp.vue";
 import Account from "./views/Account.vue";
 import Movie from "./views/Movie.vue";
 
@@ -21,11 +18,6 @@ export default new Router({
       component: Home,
     },
     {
-      path: "/about",
-      name: "about",
-      component: About,
-    },
-    {
       path: "/register",
       name: "register",
       component: Register,
@@ -36,22 +28,12 @@ export default new Router({
       component: Login,
     },
     {
-      path: "/search",
-      name: "search",
-      component: Search,
-    },
-    {
       path: "/account",
       name: "account",
       component: Account,
     },
     {
-      path: "/movieapp",
-      name: "movieapp",
-      component: MovieApp,
-    },
-    {
-      path: "/movie/:id",
+      path: "/:id",
       name: "movie",
       component: Movie,
       props: true,

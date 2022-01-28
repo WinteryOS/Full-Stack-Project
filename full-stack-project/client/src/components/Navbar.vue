@@ -6,11 +6,7 @@
         <div class="title">Movie Review</div></router-link
       >
       <div>
-        <div
-          id="nav"
-          class="row"
-          v-if="name === 'movieapp' || name === 'account'"
-        >
+        <div id="nav" class="row" v-if="token">
           <router-link class="nav-link" to="/account">Account</router-link>
           <div class="nav-link" v-on:click="signOut">Sign Out</div>
         </div>
@@ -26,12 +22,22 @@
 <script>
 export default {
   props: ["name"],
+  data() {
+    return {
+      user: null,
+      token: null,
+    };
+  },
   methods: {
     signOut: () => {
       localStorage.removeItem("user");
       localStorage.removeItem("token");
       window.location.reload();
     },
+  },
+  created() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.token = JSON.parse(localStorage.getItem("token"));
   },
 };
 </script>
@@ -47,8 +53,11 @@ export default {
   color: #42b983;
 }
 .navbar {
+  position: relative;
   background-color: #f3f3f3;
   height: 80px;
+  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.4);
+  z-index: 10;
 }
 .nav-content {
   display: flex;

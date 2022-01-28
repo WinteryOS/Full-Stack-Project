@@ -42,9 +42,8 @@ export default {
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data.token));
           localStorage.setItem("user", JSON.stringify(res.data.user));
-          this.$router.replace({
-            name: "movieapp",
-          });
+          this.$router.push("/");
+          window.location.reload();
         })
         .catch((err) => {
           console.log(err);

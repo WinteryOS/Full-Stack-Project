@@ -2,7 +2,7 @@
   <div>
     <Header :movie="popular[0]" :content="true" />
     <div class="page-space content">
-      <div ref="draggableContainer" id="draggable-container">
+      <div v-if="token" ref="draggableContainer" id="draggable-container">
         <div id="draggable-header" @mousedown="dragMouseDown"></div>
         <form class="search-form" v-on:submit.prevent="submitForm">
           <div class="form-area">
@@ -80,6 +80,7 @@ export default {
         movementX: 0,
         movementY: 0,
       },
+      token: null,
     };
   },
   components: {
@@ -175,6 +176,7 @@ export default {
     },
   },
   created() {
+    this.token = JSON.parse(localStorage.getItem("token"));
     axios
       .get(
         "https://api.themoviedb.org/3/movie/popular?api_key=21942037df64bd391a7cff90bc6755db&language=en-US&page=1"

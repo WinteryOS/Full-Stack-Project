@@ -224,7 +224,7 @@ export default {
 }
 #draggable-header {
   cursor: all-scroll;
-  background-color: #02198b;
+  background-color: #777777;
   height: 35px;
   z-index: 10;
   border-radius: 10px 10px 0px 0px;

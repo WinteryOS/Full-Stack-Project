@@ -65,7 +65,7 @@ body {
   flex-wrap: wrap;
 }
 .sm-icon {
-  width: 58px;
+  width: 126px;
 }
 .btn {
   display: inline-block;
@@ -116,6 +116,7 @@ input[type="password"] {
   border: none;
   background: #f6f6f6;
   border-radius: 100vh;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
 }
 .bold {
   font-weight: 700;

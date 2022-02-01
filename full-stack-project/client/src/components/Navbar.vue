@@ -2,8 +2,8 @@
   <div class="navbar">
     <div class="nav-content">
       <router-link class="nav-link row" to="/"
-        ><img class="sm-icon" alt="Movie Icon" src="../assets/movie-icon.png" />
-        <div class="title">Movie Review</div></router-link
+        ><img class="sm-icon" alt="Movie Icon" src="../assets/sliced.jpg" />
+        <div class="title">tomatoes</div></router-link
       >
       <div>
         <div id="nav" class="row" v-if="token">
@@ -56,10 +56,10 @@ export default {
 }
 .navbar {
   position: relative;
-  background-color: #f3f3f3;
+  background-color: #ffffff;
   height: 80px;
   box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.4);
-  z-index: 10;
+  z-index: 5;
 }
 .nav-content {
   display: flex;
@@ -76,9 +76,11 @@ export default {
   cursor: pointer;
 }
 .title {
-  font-size: 28px;
+  font-size: 45px;
+  font-weight: 700;
+  margin-top: 3px;
   padding: 0px 15px;
-  margin-top: 5px;
-  color: black;
+
+  color: #cf222e;
 }
 </style>

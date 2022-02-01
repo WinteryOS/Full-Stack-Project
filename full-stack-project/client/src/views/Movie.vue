@@ -30,18 +30,15 @@
     <div v-if="reviews.length" class="review-content">
       <div class="row-center">
         <div v-for="review in reviews" class="review-card">
-          <div class="row">
-            <h3>{{ review.username }}</h3>
-            <div>
-              <div>{{ review.review }}</div>
-              <div v-if="review.rating">
-                <star-rating
-                  :rating="review.rating"
-                  :read-only="true"
-                  :increment="0.01"
-                ></star-rating>
-              </div>
-            </div>
+          <h3>{{ review.username }}</h3>
+          <div>{{ review.review }}</div>
+          <div v-if="review.rating">
+            <star-rating
+              :rating="review.rating"
+              :read-only="true"
+              :increment="0.01"
+              :star-size="20"
+            ></star-rating>
           </div>
         </div>
       </div>
@@ -124,25 +121,27 @@ export default {
   padding: 0px 20px;
 }
 .review-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  grid-gap: 1rem;
+  justify-items: center;
+  align-items: center;
   margin: 25px auto 25px auto;
   max-width: 900px;
   text-align: left;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #fbfbfb;
-  height: 400px;
+  height: 375px;
   overflow-y: scroll;
   box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
 }
 .review-card {
   padding: 20px;
-  margin: 20px;
-  width: 80%;
+  margin: 10px;
+  width: 320px;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
-}
-.vue-star-rating-star {
-  width: 30px;
 }
 .poster-img {
   width: 250px;

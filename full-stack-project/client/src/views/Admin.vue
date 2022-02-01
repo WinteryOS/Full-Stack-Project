@@ -2,9 +2,9 @@
   <div class="content">
     <div class="row-space-between user-title">
       <div class="row">
-        <div style="width: 300px">USER ID</div>
-        <div style="width: 250px">USERNAME</div>
-        <div style="width: 250px">ADMIN</div>
+        <div class="bold" style="width: 300px">USER ID</div>
+        <div class="bold" style="width: 250px">USERNAME</div>
+        <div class="bold" style="width: 250px">ADMIN</div>
       </div>
       <div>
         <div></div>
@@ -30,9 +30,9 @@
     </div>
     <div class="row-space-between user-title">
       <div class="row">
-        <div style="width: 200px">USERNAME</div>
-        <div style="width: 150px">RATING</div>
-        <div style="width: 250px">REVIEW</div>
+        <div class="bold" style="width: 200px">USERNAME</div>
+        <div class="bold" style="width: 150px">RATING</div>
+        <div class="bold" style="width: 250px">REVIEW</div>
       </div>
       <div>
         <div></div>
@@ -119,10 +119,9 @@ export default {
 .user-title {
   text-align: left;
   padding: 10px;
-  margin: 35px 18px 5px 0px;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-  background-color: #fff;
+  margin: 45px 18px 5px 0px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+  background-color: #f6f6f6;
 }
 .user-content {
   text-align: left;

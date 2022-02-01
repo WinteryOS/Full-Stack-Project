@@ -88,6 +88,9 @@ body {
 .confirm-btn {
   background-color: #04aa6d;
 }
+.delete-btn {
+  background-color: #cf222e;
+}
 form {
 }
 .account-form {

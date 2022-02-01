@@ -27,8 +27,7 @@
         </div>
       </div>
     </div>
-    <div v-if="reviews.length" class="review-content border-test">
-      <h2 style="padding: 0px 35spx">Reviews:</h2>
+    <div v-if="reviews.length" class="review-content">
       <div class="row-center">
         <div v-for="review in reviews" class="review-card">
           <div>{{ review.username }}</div>
@@ -116,12 +115,17 @@ export default {
   margin: 25px auto 25px auto;
   max-width: 900px;
   text-align: left;
+  border-radius: 5px;
+  background-color: #fbfbfb;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
 }
 .review-card {
   padding: 20px;
-  margin: 20px 10px;
-  width: 225px;
-  border: 1px solid red;
+  margin: 20px;
+  width: 80%;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
 }
 .poster-img {
   width: 250px;

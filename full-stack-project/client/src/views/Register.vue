@@ -33,7 +33,7 @@ export default {
       form: {
         username: "",
         password: "",
-        admin: false,
+        admin: true,
       },
       errors: [],
     };
@@ -43,23 +43,23 @@ export default {
       this.errors = [];
       const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{7,29}$/;
 
-      // console.log(this.form.username);
-      if (!usernameRegex.test(this.form.username)) {
-        // console.log("HIT");
-        this.errors.push("Username Invalid");
-      }
-      // axios
-      //   .post("http://localhost:9000/api", this.form)
-      //   .then((res) => {
-      //     //Success - Route to Home or Login
-      //     //Code Below Routes to Home
-      //     this.$router.push("/");
-      //     console.log(res.data);
-      //   })
-      //   .catch((err) => {
-      //     //Display Error On Page
-      //     console.log(err);
-      //   });
+      // // console.log(this.form.username);
+      // if (!usernameRegex.test(this.form.username)) {
+      //   // console.log("HIT");
+      //   this.errors.push("Username Invalid");
+      // }
+      axios
+        .post("http://localhost:9000/api", this.form)
+        .then((res) => {
+          //Success - Route to Home or Login
+          //Code Below Routes to Home
+          this.$router.push("/login");
+          console.log(res.data);
+        })
+        .catch((err) => {
+          //Display Error On Page
+          console.log(err);
+        });
     },
   },
 };

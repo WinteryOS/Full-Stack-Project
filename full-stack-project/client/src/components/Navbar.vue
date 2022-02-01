@@ -7,7 +7,9 @@
       >
       <div>
         <div id="nav" class="row" v-if="token">
-          <router-link class="nav-link" to="/account">Account</router-link>
+          <div v-if="user.admin">
+            <router-link class="nav-link" to="/admin">Admin</router-link>
+          </div>
           <div class="nav-link" v-on:click="signOut">Sign Out</div>
         </div>
         <div id="nav" v-else>

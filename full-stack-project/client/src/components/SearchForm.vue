@@ -88,18 +88,25 @@ export default {
           res.data.results.forEach((movie) => {
             if (
               movie.media_type === "movie" &&
+              movie.backdrop_path &&
+              movie.poster_path &&
               this.compareGenres(this.form.genre, movie.genre_ids)
             ) {
               this.searched.push(movie);
             } else if (movie.media_type === "person") {
               movie.known_for.forEach((m) => {
-                if (this.compareGenres(this.form.genre, m.genre_ids)) {
+                if (
+                  m.backdrop_path &&
+                  m.poster_path &&
+                  this.compareGenres(this.form.genre, m.genre_ids)
+                ) {
                   this.searched.push(m);
                 }
               });
             }
           });
           this.popular = [];
+          console.log(this.searched);
         })
         .catch((err) => {
           console.log(err);

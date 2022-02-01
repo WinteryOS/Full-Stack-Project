@@ -3,8 +3,8 @@
     <div class="modal-backdrop">
       <div class="modal">
         <header class="modal-header">
-          <slot name="header"> Leave A Review </slot>
-          <button type="button" class="btn-close" @click="close">x</button>
+          <slot name="header">LEAVE A REVIEW </slot>
+          <button type="button" class="btn-close" @click="close">X</button>
         </header>
         <section class="modal-body">
           <slot name="body">
@@ -18,8 +18,8 @@
           <slot name="footer">
             <star-rating v-model="form.rating"></star-rating>
           </slot>
-          <button type="button" class="btn-green" @click="close">
-            Submit/Close
+          <button type="button" class="btn confirm-btn" @click="close">
+            SUBMIT
           </button>
         </footer>
       </div>
@@ -79,9 +79,14 @@ export default {
 .modal {
   background: #ffffff;
   box-shadow: 2px 2px 20px 1px;
+  padding: 20px;
+  border-radius: 5px;
   overflow-x: auto;
   display: flex;
   flex-direction: column;
+}
+
+.modal-textarea {
 }
 
 .modal-header,

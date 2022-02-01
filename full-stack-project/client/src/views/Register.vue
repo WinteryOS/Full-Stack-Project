@@ -58,7 +58,7 @@ export default {
         .then((res) => {
           //Success - Route to Home or Login
           //Code Below Routes to Home
-          this.$router.push("/");
+          this.$router.push("/login");
           console.log(res.data);
         })
         .catch((err) => {

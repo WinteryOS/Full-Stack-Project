@@ -30,9 +30,19 @@
     <div v-if="reviews.length" class="review-content">
       <div class="row-center">
         <div v-for="review in reviews" class="review-card">
-          <div>{{ review.username }}</div>
-          <div>{{ review.review }}</div>
-          <div>{{ review.rating }}</div>
+          <div class="row">
+            <h3>{{ review.username }}</h3>
+            <div>
+              <div>{{ review.review }}</div>
+              <div v-if="review.rating">
+                <star-rating
+                  :rating="review.rating"
+                  :read-only="true"
+                  :increment="0.01"
+                ></star-rating>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -44,11 +54,13 @@
 import axios from "axios";
 import Modal from "@/components/ReviewModal.vue";
 import Header from "@/components/Header.vue";
+import StarRating from "vue-star-rating";
 export default {
   name: "movie",
   components: {
     Modal,
     Header,
+    StarRating,
   },
   data() {
     return {
@@ -117,6 +129,8 @@ export default {
   text-align: left;
   border-radius: 5px;
   background-color: #fbfbfb;
+  height: 400px;
+  overflow-y: scroll;
   box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
 }
 .review-card {
@@ -126,6 +140,9 @@ export default {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
+}
+.vue-star-rating-star {
+  width: 30px;
 }
 .poster-img {
   width: 250px;

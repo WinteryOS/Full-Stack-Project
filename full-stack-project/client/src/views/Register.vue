@@ -33,7 +33,7 @@ export default {
       form: {
         username: "",
         password: "",
-        admin: true,
+        admin: false,
       },
       errors: [],
     };

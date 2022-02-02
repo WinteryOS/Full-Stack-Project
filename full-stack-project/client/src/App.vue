@@ -108,7 +108,8 @@ form {
   border-radius: 0px 0px 10px 10px;
 }
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
   width: 90%;
   padding: 15px;
   margin: 10px 0 28px 0;

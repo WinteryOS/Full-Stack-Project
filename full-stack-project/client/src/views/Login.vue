@@ -1,7 +1,6 @@
 <template>
   <form class="account-form" v-on:submit.prevent="submitForm">
     <div class="form-area">
-      <label><b>Username</b></label>
       <input
         type="text"
         id="username"
@@ -9,7 +8,6 @@
         v-model="form.username"
       />
 
-      <label><b>Password</b></label>
       <input
         type="password"
         id="password"

@@ -1,3 +1,18 @@
+//CSV TO JSON
+// const csvtojson = require("csvtojson");
+// const fs = require("fs");
+// const csvFilePath = "users1.csv";
+
+// csvtojson()
+//   .fromFile(csvFilePath)
+//   .then((json) => {
+//     console.log(json);
+//     fs.writeFileSync("users.json", JSON.stringify(json), "utf-8", (err) => {
+//       if (err) console.log(err);
+//     });
+//   });
+
+//
 const cors = require("cors");
 const express = require("express");
 const jsonwebtoken = require("jsonwebtoken");

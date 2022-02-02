@@ -7,7 +7,7 @@
         <div class="bold" style="width: 250px">ADMIN</div>
       </div>
       <div>
-        <div></div>
+        <div class="bold">TOTAL: {{ allUsers.length }}</div>
       </div>
     </div>
     <div class="user-display">
@@ -35,7 +35,7 @@
         <div class="bold" style="width: 250px">REVIEW</div>
       </div>
       <div>
-        <div></div>
+        <div class="bold">TOTAL: {{ allReviews.length }}</div>
       </div>
     </div>
     <div class="review-display">

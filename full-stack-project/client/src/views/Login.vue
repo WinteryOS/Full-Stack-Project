@@ -40,19 +40,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.errors = [];
-      const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{7,29}$/;
-      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-      // console.log(this.form.username);
-      if (!usernameRegex.test(this.form.username)) {
-        this.errors.push("Username Invalid");
-      }
-      if(!passwordRegex.test(this.form.password)) {
-        this.errors.push("Password Invalid")
-      }
       
-      else{
       axios
         .post("http://localhost:9000/api/authenticate", this.form)
         .then((res) => {
@@ -64,8 +52,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-
-      }
     },
   },
 };

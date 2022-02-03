@@ -71,7 +71,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   data() {
     return {
@@ -95,21 +94,58 @@ export default {
     submitForm() {
       this.errors = [];
       const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{7,29}$/;
-
-      // // console.log(this.form.username);
-      // if (!usernameRegex.test(this.form.username)) {
-      //   // console.log("HIT");
-      //   this.errors.push("Username Invalid");
-      // }
-      axios
-        .post("http://localhost:9000/api", this.form)
-        .then((res) => {
-          this.$router.push("/login");
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      const nameRegex = /^[a-z ,.'-]+$/i;
+      const streetRegex = /^\s*\S+(?:\s+\S+){2}/;
+      const cityRegex =
+        /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
+      const stateRegex = /[^,]*[A-Z]{2}/;
+      const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
+      const emailRegex =
+        /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+      const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+      console.log("hello");
+      // console.log(this.form.username);
+      if (!usernameRegex.test(this.form.username)) {
+        this.errors.push("Username Invalid");
+      }
+      if (!passwordRegex.test(this.form.password)) {
+        this.errors.push("Password Invalid");
+      }
+      if (!nameRegex.test(this.form.fname)) {
+        this.errors.push("First Name Invalid");
+      }
+      if (!nameRegex.test(this.form.lname)) {
+        this.errors.push("Last Name Invalid");
+      }
+      if (!streetRegex.test(this.form.street)) {
+        this.errors.push("First Name Invalid");
+      }
+      if (!cityRegex.test(this.form.city)) {
+        this.errors.push("City is Invalid");
+      }
+      if (!stateRegex.test(this.form.state)) {
+        this.errors.push("State Invalid");
+      }
+      if (!zipRegex.test(this.form.zip_code)) {
+        this.errors.push("Zip Code Invalid");
+      }
+      if (!emailRegex.test(this.form.email)) {
+        this.errors.push("Email Invalid");
+      }
+      if (!phoneRegex.test(this.form.phone)) {
+        this.errors.push("Phone Number Invalid");
+      } else {
+        axios
+          .post("http://localhost:9000/api", this.form)
+          .then((res) => {
+            this.$router.push("/login");
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
   },
 };

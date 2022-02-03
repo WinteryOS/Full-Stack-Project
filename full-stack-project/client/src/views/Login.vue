@@ -1,7 +1,6 @@
 <template>
   <form class="account-form" v-on:submit.prevent="submitForm">
     <div class="form-area">
-      <label><b>Username</b></label>
       <input
         type="text"
         id="username"
@@ -9,13 +8,16 @@
         v-model="form.username"
       />
 
-      <label><b>Password</b></label>
       <input
         type="password"
         id="password"
         placeholder="Enter Password"
         v-model="form.password"
       />
+
+      <div v-for="error in errors">
+        <div>{{ error }}</div>
+      </div>
 
       <button type="submit" class="btn confirm-btn">LOGIN</button>
     </div>
@@ -33,10 +35,12 @@ export default {
         username: "",
         password: "",
       },
+        errors: [],
     };
   },
   methods: {
     submitForm() {
+      
       axios
         .post("http://localhost:9000/api/authenticate", this.form)
         .then((res) => {

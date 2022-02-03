@@ -65,7 +65,7 @@ body {
   flex-wrap: wrap;
 }
 .sm-icon {
-  width: 58px;
+  width: 126px;
 }
 .btn {
   display: inline-block;
@@ -88,6 +88,9 @@ body {
 .confirm-btn {
   background-color: #04aa6d;
 }
+.delete-btn {
+  background-color: #cf222e;
+}
 form {
 }
 .account-form {
@@ -98,25 +101,23 @@ form {
   border-radius: 5px;
 }
 .search-form {
-  position: fixed;
-  z-index: 10;
-  bottom: 30px;
-  right: 30px;
   width: 475px;
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
   background-color: #ffffff;
   box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
+  border-radius: 0px 0px 10px 10px;
 }
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
   width: 90%;
   padding: 15px;
   margin: 10px 0 28px 0;
   display: inline-block;
   border: none;
   background: #f6f6f6;
-  border-radius: 3px;
+  border-radius: 100vh;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
 }
 .bold {
   font-weight: 700;

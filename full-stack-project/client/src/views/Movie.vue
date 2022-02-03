@@ -27,13 +27,19 @@
         </div>
       </div>
     </div>
-    <div v-if="reviews.length" class="review-content border-test">
-      <h2 style="padding: 0px 35spx">Reviews:</h2>
+    <div v-if="reviews.length" class="review-content">
       <div class="row-center">
         <div v-for="review in reviews" class="review-card">
-          <div>{{ review.username }}</div>
+          <h3>{{ review.username }}</h3>
           <div>{{ review.review }}</div>
-          <div>{{ review.rating }}</div>
+          <div v-if="review.rating">
+            <star-rating
+              :rating="review.rating"
+              :read-only="true"
+              :increment="0.01"
+              :star-size="20"
+            ></star-rating>
+          </div>
         </div>
       </div>
     </div>
@@ -45,11 +51,13 @@
 import axios from "axios";
 import Modal from "@/components/ReviewModal.vue";
 import Header from "@/components/Header.vue";
+import StarRating from "vue-star-rating";
 export default {
   name: "movie",
   components: {
     Modal,
     Header,
+    StarRating,
   },
   data() {
     return {
@@ -113,15 +121,27 @@ export default {
   padding: 0px 20px;
 }
 .review-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  grid-gap: 1rem;
+  justify-items: center;
+  align-items: center;
   margin: 25px auto 25px auto;
   max-width: 900px;
   text-align: left;
+  border-radius: 10px;
+  background-color: #fbfbfb;
+  height: 375px;
+  overflow-y: scroll;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
 }
 .review-card {
   padding: 20px;
-  margin: 20px 10px;
-  width: 225px;
-  border: 1px solid red;
+  margin: 10px;
+  width: 320px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
 }
 .poster-img {
   width: 250px;

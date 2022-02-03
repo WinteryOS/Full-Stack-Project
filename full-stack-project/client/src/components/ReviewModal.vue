@@ -2,25 +2,30 @@
   <form>
     <div class="modal-backdrop">
       <div class="modal">
-        <header class="modal-header">
-          <slot name="header"> Leave A Review </slot>
-          <button type="button" class="btn-close" @click="close">x</button>
+        <header class="modal-header bold">
+          <slot name="header">LEAVE A REVIEW </slot>
+          <button type="button" class="x-btn btn-close" @click="close">
+            X
+          </button>
         </header>
         <section class="modal-body">
           <slot name="body">
             <textarea
               v-model="form.review"
-              placeholder="add multiple lines"
+              maxlength="100"
+              placeholder="Maximum of 100 characters"
             ></textarea>
           </slot>
         </section>
         <footer class="modal-footer">
           <slot name="footer">
-            <star-rating v-model="form.rating"></star-rating>
+            <star-rating v-model="form.rating" :star-size="35"></star-rating>
           </slot>
-          <button type="button" class="btn-green" @click="close">
-            Submit/Close
-          </button>
+          <div style="margin: 15px 0px">
+            <button type="button" class="btn confirm-btn" @click="submit">
+              SUBMIT
+            </button>
+          </div>
         </footer>
       </div>
     </div>
@@ -46,7 +51,7 @@ export default {
     StarRating,
   },
   methods: {
-    close() {
+    submit() {
       const user = JSON.parse(localStorage.getItem("user"));
       this.form.username = user.username;
       this.form.movieId = this.$route.params.id;
@@ -59,6 +64,9 @@ export default {
           console.log(err);
         });
     },
+    close() {
+      this.$emit("close");
+    },
   },
 };
 </script>
@@ -66,6 +74,7 @@ export default {
 <style>
 .modal-backdrop {
   position: fixed;
+  z-index: 10;
   top: 0;
   bottom: 0;
   left: 0;
@@ -75,32 +84,41 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
+textarea {
+  width: 350px;
+  resize: none;
+  height: 100px;
+  border: none;
+  padding: 10px;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+textarea:focus {
+  outline: none !important;
+  border: 2px solid #cccccc;
+}
 .modal {
   background: #ffffff;
   box-shadow: 2px 2px 20px 1px;
+  padding: 20px;
+  border-radius: 5px;
   overflow-x: auto;
   display: flex;
   flex-direction: column;
 }
-
-.modal-header,
-.modal-footer {
-  padding: 15px;
-  display: flex;
-}
-
 .modal-header {
   position: relative;
   border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
+  color: #000000;
   justify-content: space-between;
+  padding: 15px;
+  text-align: center;
 }
 
 .modal-footer {
-  border-top: 1px solid #eeeeee;
+  display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
 }
 
 .modal-body {
@@ -117,7 +135,7 @@ export default {
   padding: 10px;
   cursor: pointer;
   font-weight: bold;
-  color: #4aae9b;
+  color: #cf222e;
   background: transparent;
 }
 
